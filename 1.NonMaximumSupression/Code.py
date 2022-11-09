@@ -10,6 +10,26 @@ def NonMaximalSuppression(img, radius):
     within window of size(radious x radious)
     around each pixel and assume all other value with 0
     """
+    suppresedImg = np.zeros(img.shape,dtype=np.uint8)
+    height = img.shape[0]
+    width = img.shape[1]
+    max = -1 
+    posX = -1 
+    posY = -1
+    for row in range (0,height,radius):
+      for column in range (0,width, radius):
+        filter = img [row:row+radius,column:column+radius]
+        for filterRow in range(0,radius):
+          for filterColumn in range(0,radius):
+            if filter[filterRow][filterColumn]> max:
+              max = filter[filterRow][filterColumn]
+              posX = filterRow
+              posY = filterColumn
+        suppresedImg[row+posX][column+posY] = max
+        max=-1
+        posX = -1
+        posY = -1
+    return suppresedImg
 
     return img
 
@@ -92,7 +112,7 @@ def harris(img, thresh=200, radius=2, verbose=True):
     return R
 
 img_pairs = [['check.bmp', 'check_rot.bmp']]
-dir = 'input/'
+dir = '1.NonMaximumSupression\input\\'
 i = 0;
 
 for [img1,img2] in img_pairs:
