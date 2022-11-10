@@ -112,23 +112,22 @@ def harris(img, thresh, radius, verbose=True):
 
     return R
 
-img_pairs = [['check.bmp', 'check_rot.bmp'],['simA.jpg','simB.jpg'],['transA.jpg','transB.jpg']]
-dir = '1.NonMaximumSupression\input\\'
-i = 0;
-
-radius = [2,3,5,7,9,11]
-threshold = [190,200,210,220,230,240]
+img_pairs = [['check.bmp', 'check_rot.bmp']]#,['simA.jpg','simB.jpg'],['transA.jpg','transB.jpg']]
+dir = 'input/'
+i = 0
+radius = [2,3,5,7,9,11,35]
+threshold = [190,200,210,220,230,240,250]
 for index in range (0,len(radius)):
-   for [img1,img2] in img_pairs:
-       print ('Image {image1} and image {image2} with radius of {radius} and threshold of {thres}'.format(image1=img1,image2=img2,radius=radius[index],thres=threshold[index]))
-       i += 1
-       img1 = cv2.imread(dir+img1, 0)
-       img2 = cv2.imread(dir+img2, 0)
-       r1 = harris(img1,thresh=threshold[index],radius=radius[index])
-       r2 = harris(img2,thresh=threshold[index],radius=radius[index]) #Note that threshod may need to be different from picture to another
-       plt.figure(i)
-       plt.subplot(221), plt.imshow(img1, cmap='gray')
-       plt.subplot(222), plt.imshow(img2, cmap='gray')
-       plt.subplot(223), plt.imshow(r1, cmap='gray')
-       plt.subplot(224), plt.imshow(r2, cmap='gray')
-       plt.show()
+    for [img1,img2] in img_pairs:
+        print ('Image {image1} and image {image2} with radius of {radius} and threshold of {thres}'.format(image1=img1,image2=img2,radius=radius[index],thres=threshold[index]))
+        i += 1
+        img1 = cv2.imread(dir+img1, 0)
+        img2 = cv2.imread(dir+img2, 0)
+        r1 = harris(img1,thresh=threshold[index],radius=radius[index])
+        r2 = harris(img2,thresh=threshold[index],radius=radius[index]) #Note that threshod may need to be different from picture to another
+        plt.figure(i)
+        plt.subplot(221), plt.imshow(img1, cmap='gray')
+        plt.subplot(222), plt.imshow(img2, cmap='gray')
+        plt.subplot(223), plt.imshow(r1, cmap='gray')
+        plt.subplot(224), plt.imshow(r2, cmap='gray')
+        plt.show()
